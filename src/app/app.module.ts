@@ -23,6 +23,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 import { KnjiznicaComponent } from './components/knjiznica/knjiznica.component';
 
+import {TableModule} from 'primeng/table';
+
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import { KnjiznicaComponent } from './components/knjiznica/knjiznica.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    TableModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

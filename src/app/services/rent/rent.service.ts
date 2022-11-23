@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Rent } from 'src/app/components/knjiznica/models/rent';
-import { RENTS } from 'src/app/mock/Knjiznica/mock-rents';
+import { Rent } from '../../components/knjiznica/models/rent';
+import { RENTS } from '../../mock/Knjiznica/mock-rents';
 import { Observable, of } from 'rxjs';
-import { Book } from 'src/app/components/knjiznica/models/book';
-import { Member } from 'src/app/components/knjiznica/models/member';
+import { Book } from '../../components/knjiznica/models/book';
+import { Member } from '../../components/knjiznica/models/member';
 import { BookService } from '../book/book.service';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class RentService {
 
   constructor(private bookService: BookService, ) { }
 
-  getRents(): Observable<Rent[]>{
+  getRents$(): Observable<Rent[]>{
     const rents = of(RENTS);
     return rents;
   }
@@ -41,7 +41,7 @@ export class RentService {
     }
 }
 getBooks(): void {
-  this.bookService.getBooks()
+  this.bookService.getBooks$()
     .subscribe(books => this.books = books);
 }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { KRUGS } from 'src/app/mock/draw/mock-krugs';
-import { POINTS } from 'src/app/mock/draw/mock-points';
-import { TROKUTS } from 'src/app/mock/draw/mock-trokuts';
+import { KRUGS } from '../../mock/draw/mock-krugs';
+import { POINTS } from '../../mock/draw/mock-points';
+import { TROKUTS } from '../../mock/draw/mock-trokuts';
 import { Krug } from './models/krug';
 import { Point } from './models/point';
 import { ShapeModel } from './models/shape';

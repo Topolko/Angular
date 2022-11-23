@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Book } from './models/book';
 import { Member } from './models/member';
 import { Rent } from './models/rent';
 import { BookService } from '../../services/book/book.service';
 import { MemberService } from '../../services/member/member.service';
 import { RentService } from '../../services/rent/rent.service';
+import { Observable, Subscription } from 'rxjs';
 
 
 
@@ -13,11 +14,14 @@ import { RentService } from '../../services/rent/rent.service';
   templateUrl: './knjiznica.component.html',
   styleUrls: ['./knjiznica.component.css']
 })
-export class KnjiznicaComponent implements OnInit {
+export class KnjiznicaComponent implements OnDestroy {
 
-  members: Member[]=[];
-  books: Book[]=[];
-  rents: Rent[]=[];
+  subscribers$: Array<Subscription> = new Array<Subscription>();
+
+  public members$: Observable<any[]>;
+  public books$: Observable<any[]>;
+  public rents$: Observable<any[]>;
+
 
   selectedBook?:Book;
   selectedMember?:Member;
@@ -36,31 +40,20 @@ export class KnjiznicaComponent implements OnInit {
   constructor(
     private memberService: MemberService,
     private bookService: BookService, 
-    private rentService: RentService
-    ) { }
-
-  ngOnInit(): void {
-    this.getBooks();
-    this.getMembers();
-    this.getRents();
-  }
-
-  getBooks(): void {
-    this.bookService.getBooks()
-      .subscribe(books => this.books = books);
-  }
-  getMembers():void{
-    this.memberService.getMemebrs()
-    .subscribe(members => this.members = members)
-  }
-  getRents():void{
-    this.rentService.getRents()
-    .subscribe(rents => this.rents = rents)
+    private rentService: RentService,
+    ) {
+    this.members$ = this.memberService.getMemebrs$(),
+    this.books$=this.bookService.getBooks$(),
+    this.rents$= this.rentService.getRents$() }
+  
+  ngOnDestroy(): void {
+    this.subscribers$.map(s => s.unsubscribe);
   }
 
   rentBook(book:Book, member:Member){
     this.rentService.rentBook(book, member)
   }
+
   returnBook(rent:Rent){
     this.rentService.returnBook(rent)
     this.selectedRent = undefined;

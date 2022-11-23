@@ -1,4 +1,4 @@
-import { Krug } from "src/app/components/draw/models/krug";
+import { Krug } from "../../components/draw/models/krug";
 
 export const KRUGS: Krug[] = [
   { id: 12, x:1, y:1, radius:34 },

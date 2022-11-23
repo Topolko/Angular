@@ -1,4 +1,4 @@
-import { Point } from "src/app/components/draw/models/point";
+import { Point } from "../../components/draw/models/point";
 
 export const POINTS: Point[] = [
   { id: 12, x:1, y:1 },
