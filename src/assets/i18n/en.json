@@ -1,0 +1,33 @@
+{
+  "app_title": "My Application",
+  "languages":{
+    "hr": "Croatian",
+    "en": "English"
+  },
+  "navbar":{
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact us"
+  },
+  "main":{
+    "heroes":"Heroes",
+    "reverseNumber":"Reverse number",
+    "bikeGears":"Bike gears",
+    "draw":"Draw",
+    "knjiznica": "Library"
+  },
+  "draw":{
+    "myPoints": "Points",
+    "myCircles":"Circles",
+    "myTriangles":"Triangles",
+    "moveToPoint":"Move to selected point"
+  },
+  "knjiznica":{
+    "books":"Books",
+    "members":"Members",
+    "rents": "Rents",
+    "rentBook":"Rent book",
+    "returnBook":"Return book"
+  }
+
+}

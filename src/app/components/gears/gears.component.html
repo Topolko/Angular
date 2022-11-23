@@ -1,0 +1,9 @@
+<ul>
+  <li>
+    <input [(ngModel)]="pogon" placeholder='pogon , vrijednosti odvojite zarezom npr: 1,2,3'>
+  </li>
+  <li>
+    <input [(ngModel)]="brojZub" placeholder='broj zubaca na pogonu, vrijednosti odvojite zarezom npr: 1,2,3'>
+  </li>
+</ul>
+<button (click)="getGears(pogon,brojZub)">Izracunaj</button>

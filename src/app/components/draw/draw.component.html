@@ -1,0 +1,96 @@
+<div class="container">
+
+    <div class="item">
+        <h2>{{'draw.myPoints' | translate}}</h2>
+        <ul class="draw">
+            <li *ngFor="let point of points">
+                <button type="button" (click)="onSelectPoint(point)">
+                    <span class="badge">{{point.id}}</span>
+                    <span class="name">x:{{point.x}} y:{{point.y}}</span>
+                </button>
+            </li>
+        </ul>
+        <div *ngIf="selectedPoint">
+            <h2>Point details</h2>
+            <div>id: {{selectedPoint.id}}</div>
+            <div>
+                <label for="point-x">Point x: </label>
+                <input id="point-x" [(ngModel)]="selectedPoint.x" placeholder="x">
+            </div>
+            <div>
+                <label for="point-y">Point y: </label>
+                <input id="point-y" [(ngModel)]="selectedPoint.y" placeholder="y">
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <h2>{{'draw.myCircles' | translate}}</h2>
+        <ul class="draw">
+            <li *ngFor="let krug of krugs">
+                <button type="button" (click)="onSelectKrug(krug)">
+                    <span class="badge">{{krug.id}}</span>
+                    <span class="name">Center: x-{{krug.x}} y-{{krug.y}}</span>
+                    <span class="name">Radius: {{krug.radius}}</span>
+                </button>
+            </li>
+        </ul>
+        <div *ngIf="selectedKrug">
+            <h2>Krug details</h2>
+            <div>id: {{selectedKrug.id}}</div>
+            <div>
+                <label for="point-x">Center x: </label>
+                <input id="point-x" [(ngModel)]="selectedKrug.x" placeholder="x">
+            </div>
+            <div>
+                <label for="point-y">Center y: </label>
+                <input id="point-y" [(ngModel)]="selectedKrug.y" placeholder="y">
+            </div>
+            <div>
+                <label for="point-radius">Radius: </label>
+                <input id="point-radius" [(ngModel)]="selectedKrug.radius" placeholder="radius">
+            </div>
+            <div *ngIf="selectedPoint">
+                <button (click)="moveToPoint(selectedPoint,'krug')">{{'draw.moveToPoint' | translate}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <h2>{{'draw.myTriangles' | translate}}</h2>
+        <ul class="draw">
+            <li *ngFor="let trokut of trokuts">
+                <button type="button" (click)="onSelectTrokut(trokut)">
+                    <span class="badge">{{trokut.id}}</span>
+                    <span class="name">Center: x-{{trokut.x}} y-{{trokut.y}}</span>
+                    <span class="name">Stranica: {{trokut.stranica}}</span>
+                    <!-- <span class="name">Površina: {{trokut.area}}</span>
+                    <span class="name">Opseg: {{trokut.opseg}}</span> -->
+                </button>
+            </li>
+        </ul>
+        <div *ngIf="selectedTrokut">
+            <h2>Triangle details</h2>
+            <div>id: {{selectedTrokut.id}}</div>
+            <div>
+                <label for="point-x">Center x: </label>
+                <input id="point-x" [(ngModel)]="selectedTrokut.x" placeholder="x">
+            </div>
+            <div>
+                <label for="point-y">Center y: </label>
+                <input id="point-y" [(ngModel)]="selectedTrokut.y" placeholder="y">
+            </div>
+            <div>
+                <label for="point-radius">Stranice: </label>
+                <input id="point-radius" [(ngModel)]="selectedTrokut.stranica" placeholder="radius">
+            </div>
+            <!-- <div>
+                <label for="point-radius">Opseg: {{selectedTrokut.opseg}}</label>
+            </div>
+            <div>
+                <label for="point-radius">Površina: {{selectedTrokut.area}}</label>
+            </div> -->
+            <div *ngIf="selectedPoint">
+                <button (click)="moveToPoint(selectedPoint, 'trokut')">{{'draw.moveToPoint' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="item">
+        <h2>{{'knjiznica.books' | translate}}</h2>
+        <ul class="knjiznica">
+            <li *ngFor="let book of books">
+                <button type="button" (click)="onSelectBook(book)">
+                    <span class="badge">{{book.id}}</span>
+                    <span class="name">{{book.autor}}</span>
+                    <span class="title">{{book.title}}</span>
+                    <span class="name">{{book.brojPrimjeraka}}</span>
+                </button>
+            </li>
+        </ul>
+        <div *ngIf="selectedBook">
+            <h2>Book details</h2>
+            <div>id: {{selectedBook.id}}</div>
+            <div>
+                <label for="title">Title: </label>
+                <input id="title" [(ngModel)]="selectedBook.title" placeholder="title">
+            </div>
+            <div>
+                <label for="autor">Autor: </label>
+                <input id="autor" [(ngModel)]="selectedBook.autor" placeholder="autor">
+            </div>
+            <div>
+                <label for="brojPrimjeraka">Broj Primjeraka: </label>
+                <input id="brojPrimjeraka" [(ngModel)]="selectedBook.brojPrimjeraka" placeholder="brojPrimjeraka">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="item">
+        <h2>{{'knjiznica.members' | translate}}</h2>
+        <ul class="knjiznica">
+            <li *ngFor="let member of members">
+                <button type="button" (click)="onSelectMember(member)">
+                    <span class="badge">{{member.id}}</span>
+                    <span class="name">{{member.name}}</span>
+                </button>
+            </li>
+        </ul>
+        <div *ngIf="selectedMember">
+            <h2>Member details</h2>
+            <div>id: {{selectedMember.id}}</div>
+            <div>
+                <label for="name">Name: </label>
+                <input id="name" [(ngModel)]="selectedMember.name" placeholder="name">
+            </div>
+            <div *ngIf="selectedBook">
+                <button (click)="rentBook(selectedBook, selectedMember)">{{'knjiznica.rentBook' | translate}}</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="item">
+        <h2>{{'knjiznica.rents' | translate}}</h2>
+        <ul class="knjiznica">
+            <li *ngFor="let rent of rents">
+                <button type="button" (click)="onSelectRent(rent)">    
+                    <span class="badge">{{rent.id}}</span>
+                    <span class="name">{{rent.dateRented.toLocaleDateString()}}</span>
+                    <span class="title">{{rent.idMember}}</span>
+                    <span class="name">{{rent.idBook}}</span>
+                </button>
+            </li>
+        </ul>      
+        <div *ngIf="selectedRent">
+            <h2>Rent details</h2>
+            <div>id: {{selectedRent.id}}</div>
+            <div>
+                <label for="dateRented">Date rented: </label>
+                <input id="dateRented" [(ngModel)]="selectedRent.dateRented" placeholder="dateRented">
+            </div>
+            <div>
+                <div>Book id: {{selectedRent.idBook}}</div>
+            </div>
+            <div>
+                <label for="idMember">member id: </label>
+                <input id="idMember" [(ngModel)]="selectedRent.idMember" placeholder="idMember">
+            </div>
+            <div *ngIf="selectedRent">
+                <button (click)="returnBook(selectedRent)">{{'knjiznica.returnBook' | translate}}</button>
+            </div>
+        </div> 
+    </div>
+
+</div>

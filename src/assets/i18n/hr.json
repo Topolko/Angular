@@ -1,0 +1,34 @@
+﻿{
+  "app_title": "My Application",
+  "languages":{
+    "hr": "Hrvatski",
+    "en": "Engleski"
+  },
+  "navbar":{
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact us"
+  },
+  "main":{
+    "heroes":"Heroji",
+    "reverseNumber":"Okrenuti broj",
+    "bikeGears":"Brzine bicikla",
+    "draw":"Crtanje",
+    "knjiznica": "Knjiznica"
+  },
+  "draw":{
+    "myPoints": "Točke",
+    "myCircles":"Krugovi",
+    "myTriangles":"Trokuti",
+    "moveToPoint":"Pomakni na odabranu točku"
+  },
+  "knjiznica":{
+    "books":"Knjige",
+    "members":"Članovi",
+    "rents": "Posuđeno",
+    "rentBook":"Posudi knjigu",
+    "returnBook":"Vrati knjigu"
+  }
+
+
+}
