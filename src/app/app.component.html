@@ -1,13 +1,43 @@
-<h1>{{title}}</h1>
-<button (click)="useLanguage('en')">{{'languages.en' | translate}}</button>
-<button (click)="useLanguage('hr')">{{'languages.hr' | translate}}</button>
-<nav>
-  <a routerLink="/heroes">{{'main.heroes' | translate}}</a>
-  <a routerLink="/fizBuzz">Fiz-buzz</a>
-  <a routerLink="/reverseNumber">{{'main.reverseNumber' | translate}}</a>
-  <a routerLink="/gears">{{'main.bikeGears' | translate}}</a>
-  <a routerLink="/draw">{{'main.draw' | translate}}</a>
-  <a routerLink="/knjiznica">{{'main.knjiznica' | translate}}</a>
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <h3 class="text-primary">{{title}}</h3>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#home" routerLink="/heroes">{{'main.heroes' | translate}}</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#Fiz-buzz" routerLink="/fizBuzz">Fiz-buzz</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#reverseNumber" routerLink="/reverseNumber">{{'main.reverseNumber' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#bikeGears" routerLink="/gears">{{'main.bikeGears' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#draw" routerLink="/draw">{{'main.draw' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#knjiznica" routerLink="/knjiznica">{{'main.knjiznica' | translate}}</a>
+    </li>
+  </ul>
+  
+  <p-selectButton class="d-flex flex-row-reverse" (click)="useLanguage(selectedLanguage)" [options]="languages" [(ngModel)]="selectedLanguage"></p-selectButton>
+  </div>
 </nav>
-<router-outlet></router-outlet>
 
+  
+  <!-- Nav tabs -->
+
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane container active" id="home"></div>
+  <div class="tab-pane container fade" id="Fiz-buzz"></div>
+  <div class="tab-pane container fade" id="reverseNumber"></div>
+  <div class="tab-pane container fade" id="bikeGears"></div>
+  <div class="tab-pane container fade" id="draw"></div>
+  <div class="tab-pane container fade" id="knjiznica"></div>
+</div>
+
+<router-outlet></router-outlet>

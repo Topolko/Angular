@@ -27,7 +27,8 @@
     "members":"Members",
     "rents": "Rents",
     "rentBook":"Rent book",
-    "returnBook":"Return book"
+    "returnBook":"Return book",
+    "plsSelect":"Select book and member"
   }
 
 }

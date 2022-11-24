@@ -15,6 +15,12 @@ export class AppComponent {
   title = 'Tour of Heroes';
   locale = 'en';
 
+  languages: string[]= [
+    'en',
+    'hr'
+  ]
+
+  selectedLanguage:string = 'en';
   constructor(
     private translate: TranslateService,
   ) {

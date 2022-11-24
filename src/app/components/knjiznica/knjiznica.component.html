@@ -1,124 +1,120 @@
-<div class="container">
+<div class="container p-5">
     <div class="item">
         <h2>{{'knjiznica.books' | translate}}</h2>
         <ul class="knjiznica">
             <div *ngIf="books$ | async as books">
-                <ul class="knjiznica">
-                 <li *ngFor="let book of books">
-                    <button type="button" (click)="onSelectBook(book)">
-                        <span class="badge">{{book.id}}</span>
-                        <span class="name">{{book.title}}</span>
-                        <span class="title">{{book.autor}}</span>
-                        <span class="name">{{book.brojPrimjeraka}}</span>
-                    </button>
-                </li>
-                </ul>
+                <div class="card">
+                    <p-table [value]="books" selectionMode="single" [(selection)]="selectedBook" [tableStyle]="{}">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Number of copies</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-book>
+                            <tr [pSelectableRow]="book">
+                                <td>{{book.id}}</td>
+                                <td>{{book.title}}</td>
+                                <td>{{book.autor}}</td>
+                                <td>{{book.brojPrimjeraka}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
             </div>   
         </ul>
-        <div *ngIf="selectedBook">
+        <div *ngIf="selectedBook" class="p-2">
             <h2>Book details</h2>
-            <div>id: {{selectedBook.id}}</div>
-            <div>
-                <label for="title">Title: </label>
+            <div class="p-1">
+                <h6>Title</h6>
                 <input id="title" [(ngModel)]="selectedBook.title" placeholder="title">
             </div>
-            <div>
-                <label for="autor">Autor: </label>
+            <div class="p-1">
+                <h6>Autor</h6>
                 <input id="autor" [(ngModel)]="selectedBook.autor" placeholder="autor">
             </div>
-            <div>
-                <label for="brojPrimjeraka">Broj Primjeraka: </label>
+            <div class="p-1">
+                <h6>Broj primjeraka</h6>
                 <input id="brojPrimjeraka" [(ngModel)]="selectedBook.brojPrimjeraka" placeholder="brojPrimjeraka">
             </div>
         </div>
     </div>
-
-
     <div class="item">
         <h2>{{'knjiznica.members' | translate}}</h2>
         <ul class="knjiznica">
             <div *ngIf="members$ | async as members">
-                <ul class="knjiznica">
-                 <li *ngFor="let member of members">
-                    <button type="button" (click)="onSelectMember(member)">
-                        <span class="badge">{{member.id}}</span>
-                        <span class="name">{{member.name}}</span>
-                    </button>
-                </li>
-                </ul>
+                <p-table [value]="members" selectionMode="single" [(selection)]="selectedMember" [tableStyle]="{}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-member>
+                        <tr [pSelectableRow]="member">
+                            <td>{{member.id}}</td>
+                            <td>{{member.name}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
             </div>
         </ul>
         <div *ngIf="selectedMember">
             <h2>Member details</h2>
-            <div>id: {{selectedMember.id}}</div>
             <div>
-                <label for="name">Name: </label>
+                <h6>Name</h6>
                 <input id="name" [(ngModel)]="selectedMember.name" placeholder="name">
             </div>
-            <div *ngIf="selectedBook">
-                <button type="button" (click)="rentBook(selectedBook,selectedMember)">{{'knjiznica.rentBook' | translate}}</button>
-            </div>
         </div>
+        <div class="p-3" *ngIf="selectedBook&&selectedMember else plsSelect">
+            <p-button  (click)="rentBook(selectedBook,selectedMember)">{{'knjiznica.rentBook' | translate}}</p-button>
+        </div>
+        <ng-template #plsSelect>
+            <button pButton pRipple type="button" class="p-button-raised p-button-secondary p-button-text">{{'knjiznica.plsSelect' | translate}}</button>
+           </ng-template>
     </div>
-
-
-    <div class="col-12 w-100">
-        <h2>{{'knjiznica.rents' | translate}}</h2>
-        <ul class="knjiznica">
-            <div *ngIf="rents$ | async as rents">
-                <ul class="knjiznica">
-                 <li *ngFor="let rent of rents">
-                    <button type="button" (click)="onSelectRent(rent)">
-                        <span class="badge">{{rent.id}}</span>
-                        <span class="name">{{rent.idBook}}</span>
-                        <span class="title">{{rent.idMember}}</span>
-                        <span class="name">{{rent.dateRented.toLocaleString()}}</span>
-
-                    </button>
-                </li>
-                </ul>
-            </div>
-        </ul>
-
-        
-        <div *ngIf="selectedRent">
-            <h2>Rent details</h2>
-            <div>id: {{selectedRent.id}}</div>
-            <div>
-                <label for="dateRented">Date rented: </label>
-                <input id="dateRented" [(ngModel)]="selectedRent.dateRented" placeholder="dateRented">
-            </div>
-            <div>
-                <div>Book id: {{selectedRent.idBook}}</div>
-            </div>
-            <div>
-                <label for="idMember">member id: </label>
-                <input id="idMember" [(ngModel)]="selectedRent.idMember" placeholder="idMember">
-            </div>
-            <div *ngIf="selectedRent">
-                <button type="button" (click)="returnBook(selectedRent)">{{'knjiznica.returnBook' | translate}}</button>
-            </div>
-        </div> 
-    </div>
-
 </div>
-    <div *ngIf="rents$ | async as rents">
-        <p-table [value]="rents">
-            <ng-template pTemplate="header">
-                <tr>
+<div *ngIf="rents$ | async as rents">
+    <p-table [value]="rents" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem', 'border':'0px'}">
+        <ng-template pTemplate="header">
+            <tr>
                     <th>id</th>
                     <th>bookid</th>
                     <th>memberid</th>
                     <th>date</th>
+                    <th>select rent</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rent>
-            <tr>
-                <td>{{rent.id}}</td>
-                <td>{{rent.idBook}}</td>
-                <td>{{rent.idMember}}</td>
-                <td>{{rent.dateRented}}</td>
-            </tr>
+                <tr>
+                    <td>{{rent.id}}</td>
+                    <td>{{rent.idBook}}</td>
+                    <td>{{rent.idMember}}</td>
+                    <td>{{rent.dateRented}}</td>
+                    <td>
+                        <p-button  (click)="onSelectRent(rent)">Select</p-button>
+                    </td>
+                </tr>
         </ng-template>
     </p-table>
 </div>
+<div class="p-3" *ngIf="selectedRent">
+    <h2>Rent details</h2>
+    <div>id: {{selectedRent.id}}</div>
+    <div>
+        <label for="dateRented">Date rented: </label>
+        <input id="dateRented" [(ngModel)]="selectedRent.dateRented" type="date">
+    </div>
+    <div>
+        <div>Book id: {{selectedRent.idBook}}</div>
+    </div>
+    <div>
+        <label for="idMember">member id: </label>
+        <input id="idMember" [(ngModel)]="selectedRent.idMember" placeholder="idMember">
+    </div>
+    <div class="p-3" *ngIf="selectedRent">
+        <p-button  (click)="returnBook(selectedRent)">{{'knjiznica.returnBook' | translate}}</p-button>
+    </div>
+</div> 

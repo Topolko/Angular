@@ -24,8 +24,9 @@ import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-comp
 import { KnjiznicaComponent } from './components/knjiznica/knjiznica.component';
 
 import {TableModule} from 'primeng/table';
-
-
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {ButtonModule} from 'primeng/button';
+import {FocusTrapModule} from 'primeng/focustrap';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,11 @@ import {TableModule} from 'primeng/table';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    FormsModule,    
+    FocusTrapModule,
     TableModule,
+    SelectButtonModule,
+    ButtonModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
