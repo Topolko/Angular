@@ -1,22 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeroesComponent } from './components/heroes/heroes.component';
-import { FizBuzzComponent } from './components/fiz-buzz/fiz-buzz.component';
-import { ReverseNumberComponent } from './components/reverse-number/reverse-number.component';
-import { GearsComponent } from './components/gears/gears.component';
-import { DrawComponent } from './components/draw/draw.component';
-import { KnjiznicaComponent } from './components/knjiznica/knjiznica.component';
-
 
 const routes: Routes = [
-  { path: '', component: HeroesComponent, pathMatch: 'full', data: { state: 'heroes' } },
-  { path: 'heroes', component: HeroesComponent },
-  { path: 'fizBuzz', component: FizBuzzComponent },
-  { path: 'reverseNumber', component: ReverseNumberComponent },
-  { path: 'gears', component: GearsComponent },
-  { path: 'draw', component: DrawComponent },
-  { path: 'knjiznica', component: KnjiznicaComponent }
-
+  {
+    path: 'heroes',
+    loadChildren: () => import('./components/heroes/heroes.module').then(m => m.HeroesModule)
+  },
+  {
+    path: 'fizBuzz',
+    loadChildren: () => import('./components/fiz-buzz/fiz-buzz.module').then(m => m.FizBuzzModule)
+  },
+  {
+    path: 'reverseNumber',
+    loadChildren: () => import('./components/reverse-number/reverse-number.module').then(m => m.ReverseNumberModule)
+  },
+  {
+    path: 'gears',
+    loadChildren: () => import('./components/gears/gears.module').then(m => m.GearsModule)
+  },
+  {
+    path: 'draw',
+    loadChildren: () => import('./components/draw/draw.module').then(m => m.DrawModule)
+  },
+  {
+    path: 'knjiznica',
+    loadChildren: () => import('./components/knjiznica/knjiznica.module').then(m => m.KnjiznicaModule)
+  },
+  {
+    path: '',
+    redirectTo: 'heroes',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

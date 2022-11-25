@@ -29,6 +29,13 @@
     "rentBook":"Rent book",
     "returnBook":"Return book",
     "plsSelect":"Select book and member"
+  },
+  "gears":{
+  "front":"Front chainring size",
+  "back":"Rear cog size"
+  },
+  "buttons":{
+    "calc":"Calculate"
   }
 
 }

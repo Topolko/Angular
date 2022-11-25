@@ -29,6 +29,13 @@
     "rentBook":"Posudi knjigu",
     "returnBook":"Vrati knjigu",
     "plsSelect":"Odaberite knjigu i člana"
+  },
+  "gears":{
+  "front":"Zubci na pogonu",
+  "back":"Zubci na kazeti"
+  },
+  "buttons":{
+    "calc":"Izračunaj"
   }
 
 
