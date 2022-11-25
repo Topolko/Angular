@@ -2,9 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Book } from './models/book';
 import { Member } from './models/member';
 import { Rent } from './models/rent';
-import { BookService } from '../../services/book/book.service';
-import { MemberService } from '../../services/member/member.service';
-import { RentService } from '../../services/rent/rent.service';
+import { KnjiznicaService } from '../../services/knjiznica/knjiznica.service';
 import { Observable, Subscription } from 'rxjs';
 
 
@@ -38,24 +36,22 @@ export class KnjiznicaComponent implements OnDestroy {
   }
 
   constructor(
-    private memberService: MemberService,
-    private bookService: BookService, 
-    private rentService: RentService,
+    private knjiznicaService: KnjiznicaService,
     ) {
-    this.members$ = this.memberService.getMemebrs$(),
-    this.books$=this.bookService.getBooks$(),
-    this.rents$= this.rentService.getRents$() }
+    this.members$ = this.knjiznicaService.getMemebrs$(),
+    this.books$=this.knjiznicaService.getBooks$(),
+    this.rents$= this.knjiznicaService.getRents$() }
   
   ngOnDestroy(): void {
     this.subscribers$.map(s => s.unsubscribe);
   }
 
   rentBook(book:Book, member:Member){
-    this.rentService.rentBook(book, member)
+    this.knjiznicaService.rentBook(book, member)
   }
 
   returnBook(rent:Rent){
-    this.rentService.returnBook(rent)
+    this.knjiznicaService.returnBook(rent)
     this.selectedRent = undefined;
   }
 }

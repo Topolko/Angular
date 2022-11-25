@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { KRUGS } from '../../mock/draw/mock-krugs';
-import { POINTS } from '../../mock/draw/mock-points';
+import { Observable } from 'rxjs';
 import { TROKUTS } from '../../mock/draw/mock-trokuts';
 import { Krug } from './models/krug';
 import { Point } from './models/point';
 import { ShapeModel } from './models/shape';
 import { Trokut } from './models/trokut';
+import { DrawService } from '../../services/draw/draw.service';
 
 @Component({
   selector: 'app-draw',
@@ -14,10 +14,12 @@ import { Trokut } from './models/trokut';
 })
 export class DrawComponent implements OnInit {
 
-  points = POINTS;
+  public points$:Observable<any[]>
+  public krugs$: Observable<any[]>
+  public trokuts$: Observable<any[]>
+
   selectedPoint?:Point;
 
-  krugs = KRUGS;
   selectedKrug?:Krug;
 
   trokuts = TROKUTS;
@@ -50,7 +52,13 @@ export class DrawComponent implements OnInit {
       this.selectedTrokut.y = point.y;
   }
   }
-  constructor() { }
+  constructor(
+    private drawService: DrawService
+  ) {
+    this.points$=this.drawService.getPoints();
+    this.krugs$=this.drawService.getKrugs();
+    this.trokuts$= this.drawService.getTrokuts();
+   }
 
   ngOnInit(): void {
   }

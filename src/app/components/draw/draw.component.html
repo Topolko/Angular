@@ -1,95 +1,151 @@
-<div class="container p-5">
+<div class="container p-5 text-center ">
+    <div class="d-flex justify-content-around">
+        <div>
+            <h2 >{{'draw.myPoints' | translate}}</h2>
+            <ul>
+                <div *ngIf="points$ | async as points">
+                    <div>
+                        <p-table [value]="points" selectionMode="single" [(selection)]="selectedPoint" [tableStyle]="{}">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Point -x</th>
+                                    <th>Point -y</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-point>
+                                <tr [pSelectableRow]="point">
+                                    <td>{{point.id}}</td>
+                                    <td>{{point.x}}</td>
+                                    <td>{{point.y}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>  
+            </ul>
+            <div *ngIf="selectedPoint">
+                <h2>Point details</h2>
+                <div>id: {{selectedPoint.id}}</div>
+                <div>
+                    <label for="point-x">Point x: </label>
+                    <input id="point-x" [(ngModel)]="selectedPoint.x" placeholder="x">
+                </div>
+                <div>
+                    <label for="point-y">Point y: </label>
+                    <input id="point-y" [(ngModel)]="selectedPoint.y" placeholder="y">
+                </div>
+            </div>
 
-    <div class="item">
-        <h2>{{'draw.myPoints' | translate}}</h2>
-        <ul class="draw">
-            <li *ngFor="let point of points">
-                <button type="button" (click)="onSelectPoint(point)">
-                    <span class="badge">{{point.id}}</span>
-                    <span class="name">x:{{point.x}} y:{{point.y}}</span>
-                </button>
-            </li>
-        </ul>
-        <div *ngIf="selectedPoint">
-            <h2>Point details</h2>
-            <div>id: {{selectedPoint.id}}</div>
-            <div>
-                <label for="point-x">Point x: </label>
-                <input id="point-x" [(ngModel)]="selectedPoint.x" placeholder="x">
-            </div>
-            <div>
-                <label for="point-y">Point y: </label>
-                <input id="point-y" [(ngModel)]="selectedPoint.y" placeholder="y">
+            
+
+
+        </div>
+        <div>
+            <h2>{{'draw.myCircles' | translate}}</h2>
+            <ul>
+                <div *ngIf="krugs$ | async as krugs">
+                    <div>
+                        <p-table [value]="krugs" selectionMode="single" [(selection)]="selectedKrug" [tableStyle]="{}">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Center -x</th>
+                                    <th>Center -y</th>
+                                    <th>Radius</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-krug>
+                                <tr [pSelectableRow]="krug">
+                                    <td>{{krug.id}}</td>
+                                    <td>{{krug.x}}</td>
+                                    <td>{{krug.y}}</td>
+                                    <td>{{krug.radius}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>  
+            </ul>
+            <div *ngIf="selectedKrug">
+                <h2>Krug details</h2>
+                <div>id: {{selectedKrug.id}}</div>
+                <div>
+                    <label for="point-x">Center x: </label>
+                    <input id="point-x" [(ngModel)]="selectedKrug.x" placeholder="x">
+                </div>
+                <div>
+                    <label for="point-y">Center y: </label>
+                    <input id="point-y" [(ngModel)]="selectedKrug.y" placeholder="y">
+                </div>
+                <div>
+                    <label for="point-radius">Radius: </label>
+                    <input id="point-radius" [(ngModel)]="selectedKrug.radius" placeholder="radius">
+                </div>
+                <div *ngIf="selectedPoint">
+                    <button (click)="moveToPoint(selectedPoint,'krug')">{{'draw.moveToPoint' | translate}}</button>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="item">
-        <h2>{{'draw.myCircles' | translate}}</h2>
-        <ul class="draw">
-            <li *ngFor="let krug of krugs">
-                <button type="button" (click)="onSelectKrug(krug)">
-                    <span class="badge">{{krug.id}}</span>
-                    <span class="name">Center: x-{{krug.x}} y-{{krug.y}}</span>
-                    <span class="name">Radius: {{krug.radius}}</span>
-                </button>
-            </li>
-        </ul>
-        <div *ngIf="selectedKrug">
-            <h2>Krug details</h2>
-            <div>id: {{selectedKrug.id}}</div>
-            <div>
-                <label for="point-x">Center x: </label>
-                <input id="point-x" [(ngModel)]="selectedKrug.x" placeholder="x">
-            </div>
-            <div>
-                <label for="point-y">Center y: </label>
-                <input id="point-y" [(ngModel)]="selectedKrug.y" placeholder="y">
-            </div>
-            <div>
-                <label for="point-radius">Radius: </label>
-                <input id="point-radius" [(ngModel)]="selectedKrug.radius" placeholder="radius">
-            </div>
-            <div *ngIf="selectedPoint">
-                <button (click)="moveToPoint(selectedPoint,'krug')">{{'draw.moveToPoint' | translate}}</button>
-            </div>
-        </div>
-    </div>
-    <div class="item">
-        <h2>{{'draw.myTriangles' | translate}}</h2>
-        <ul class="draw">
-            <li *ngFor="let trokut of trokuts">
-                <button type="button" (click)="onSelectTrokut(trokut)">
-                    <span class="badge">{{trokut.id}}</span>
-                    <span class="name">Center: x-{{trokut.x}} y-{{trokut.y}}</span>
-                    <span class="name">Stranica: {{trokut.stranica}}</span>
-                    <!-- <span class="name">Površina: {{trokut.area}}</span>
-                    <span class="name">Opseg: {{trokut.opseg}}</span> -->
-                </button>
-            </li>
-        </ul>
-        <div *ngIf="selectedTrokut">
-            <h2>Triangle details</h2>
-            <div>id: {{selectedTrokut.id}}</div>
-            <div>
-                <label for="point-x">Center x: </label>
-                <input id="point-x" [(ngModel)]="selectedTrokut.x" placeholder="x">
-            </div>
-            <div>
-                <label for="point-y">Center y: </label>
-                <input id="point-y" [(ngModel)]="selectedTrokut.y" placeholder="y">
-            </div>
-            <div>
-                <label for="point-radius">Stranice: </label>
-                <input id="point-radius" [(ngModel)]="selectedTrokut.stranica" placeholder="radius">
-            </div>
-            <!-- <div>
-                <label for="point-radius">Opseg: {{selectedTrokut.opseg}}</label>
-            </div>
-            <div>
-                <label for="point-radius">Površina: {{selectedTrokut.area}}</label>
-            </div> -->
-            <div *ngIf="selectedPoint">
-                <button (click)="moveToPoint(selectedPoint, 'trokut')">{{'draw.moveToPoint' | translate}}</button>
+
+        <div>
+            <h2>{{'draw.myTriangles' | translate}}</h2>
+            <ul>
+                <div *ngIf="trokuts$ | async as trokuts">
+                    <div>
+                        <p-table [value]="trokuts" selectionMode="single" [(selection)]="selectedTrokut" [tableStyle]="{}">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Center -x</th>
+                                    <th>Center -y</th>
+                                    <th>Opseg</th>
+                                    <th>Povrsina</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-trokut>
+                                <tr [pSelectableRow]="trokut">
+                                    <td>{{trokut.id}}</td>
+                                    <td>{{trokut.x}}</td>
+                                    <td>{{trokut.y}}</td>
+                                    <td>{{trokut.stranica | opsegTrokut}}</td>
+                                    <td>{{trokut.stranica | povrsinaTrokut}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>  
+            </ul>
+            <div *ngIf="selectedTrokut">
+                <h2>Triangle details</h2>
+                <div>id: {{selectedTrokut.id}}</div>
+                <div>
+                    <label for="point-x">Center x: </label>
+                    <input id="point-x" [(ngModel)]="selectedTrokut.x" placeholder="x">
+                </div>
+                <div>
+                    <label for="point-y">Center y: </label>
+                    <input id="point-y" [(ngModel)]="selectedTrokut.y" placeholder="y">
+                </div>
+                <div>
+                    <label for="point-radius">Stranice: </label>
+                    <input id="point-radius" [(ngModel)]="selectedTrokut.stranica" placeholder="radius">
+                </div>
+                <div>
+                    <label for="point-radius">Opseg: {{selectedTrokut.stranica | opsegTrokut}}</label>
+                </div>
+                <div>
+                    <label for="point-radius">Povrsina: {{selectedTrokut.stranica | povrsinaTrokut}}</label>
+                </div>
+                <!-- <div>
+                    <label for="point-radius">Opseg: {{selectedTrokut.opseg}}</label>
+                </div>
+                <div>
+                    <label for="point-radius">Površina: {{selectedTrokut.area}}</label>
+                </div> -->
+                <div *ngIf="selectedPoint">
+                    <button (click)="moveToPoint(selectedPoint, 'trokut')">{{'draw.moveToPoint' | translate}}</button>
+                </div>
             </div>
         </div>
     </div>

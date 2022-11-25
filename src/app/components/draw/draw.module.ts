@@ -8,16 +8,24 @@ import { FormsModule } from '@angular/forms';
 // import ngx-translate and the http loader
 import { TranslateModule } from '@ngx-translate/core';
 
+import { OpsegTrokutPipe } from './pipes/opsegTrokut.pipe';
+import { PovrsinaTrokutPipe } from './pipes/povrsinaTrokut.pipe';
+
+import {TableModule} from 'primeng/table';
+
 
 @NgModule({
   declarations: [
-    DrawComponent
+    DrawComponent,
+    OpsegTrokutPipe,
+    PovrsinaTrokutPipe
   ],
   imports: [
     CommonModule,
     DrawRoutingModule,
     FormsModule,
-    TranslateModule
+    TranslateModule,
+    TableModule
   ],
   exports: [
     TranslateModule

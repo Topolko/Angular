@@ -4,22 +4,19 @@ import { RENTS } from '../../mock/Knjiznica/mock-rents';
 import { Observable, of } from 'rxjs';
 import { Book } from '../../components/knjiznica/models/book';
 import { Member } from '../../components/knjiznica/models/member';
-import { BookService } from '../book/book.service';
+import { BOOKS } from '../../mock/Knjiznica/mock-books';
+import { MEMBERS } from '../../mock/Knjiznica/mock-members';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RentService {
+export class KnjiznicaService {
 
   books: Book[]=[];
 
-  constructor(private bookService: BookService, ) { }
+  constructor() { }
 
-  getRents$(): Observable<Rent[]>{
-    const rents = of(RENTS);
-    return rents;
-  }
-
+  
   rentBook(book:Book, member:Member):void{
     if(book.brojPrimjeraka>0){
       book.brojPrimjeraka-=1;
@@ -29,20 +26,30 @@ export class RentService {
       alert('no copies left')
     }
   }
-
+  
   returnBook(rent:Rent){
-    this.getBooks();
-    let book = this.books.find(x=>x.id == rent?.idBook);
+    let book = BOOKS.find(x=>x.id == rent?.idBook);
     if(rent&&book){
-        book.brojPrimjeraka +=1
-        RENTS.forEach((value,index)=>{
-          if(value.id==rent.id) RENTS.splice(index,1);
+      book.brojPrimjeraka +=1
+      RENTS.forEach((value,index)=>{
+        if(value.id==rent.id) RENTS.splice(index,1);
       });
     }
-}
-getBooks(): void {
-  this.bookService.getBooks$()
-    .subscribe(books => this.books = books);
-}
+  }
+  
+  getRents$(): Observable<Rent[]>{
+    const rents = of(RENTS);
+    return rents;
+  }
 
+  getBooks$(): Observable<Book[]> {
+    const books = of(BOOKS);
+    return books;
+  }
+  
+  getMemebrs$(): Observable<Member[]>{
+    const members = of(MEMBERS);
+    return members;
+  }
+  
 }
