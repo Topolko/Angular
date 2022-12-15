@@ -12,6 +12,9 @@ import { OpsegTrokutPipe } from './pipes/opsegTrokut.pipe';
 import { PovrsinaTrokutPipe } from './pipes/povrsinaTrokut.pipe';
 
 import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from "primeng/inputtext";
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import {TableModule} from 'primeng/table';
   ],
   imports: [
     CommonModule,
+    DialogModule,
+    InputTextModule,
     DrawRoutingModule,
+    ButtonModule,
     FormsModule,
     TranslateModule,
     TableModule

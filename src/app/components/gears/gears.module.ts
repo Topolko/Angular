@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import {ButtonModule} from 'primeng/button';
 
+import {FocusTrapModule} from 'primeng/focustrap';
+import { InputTextModule } from "primeng/inputtext";
+
 
 @NgModule({
   declarations: [
@@ -16,6 +19,8 @@ import {ButtonModule} from 'primeng/button';
     CommonModule,
     GearsRoutingModule,
     FormsModule,
+    InputTextModule,
+    FocusTrapModule,
     TranslateModule,
     ButtonModule
   ],

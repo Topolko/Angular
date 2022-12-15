@@ -20,10 +20,28 @@ export class KnjiznicaComponent implements OnDestroy {
   public books$: Observable<any[]>;
   public rents$: Observable<any[]>;
 
-
   selectedBook?:Book;
   selectedMember?:Member;
   selectedRent?:Rent;
+
+  displayBook: boolean = false;
+  displayMember: boolean = false;
+
+  newTitle?:string;
+  newAutor?:string;
+  newCopies?:number;
+  newName?:string;
+
+  showModalDialog(type:string) {
+    switch(type){
+      case type="book":
+        this.displayBook = true;
+        break;
+      case type="member":
+        this.displayMember=true;
+        break;
+    }
+  }
 
   onSelectBook(book:Book):void{
     this.selectedBook = book;
@@ -53,5 +71,9 @@ export class KnjiznicaComponent implements OnDestroy {
   returnBook(rent:Rent){
     this.knjiznicaService.returnBook(rent)
     this.selectedRent = undefined;
+  }
+  addBook(newTitle:any, newAutor:any, newCopies:any):void{
+    this.knjiznicaService.addBook(newTitle,newAutor,newCopies);
+    this.displayBook=false;
   }
 }

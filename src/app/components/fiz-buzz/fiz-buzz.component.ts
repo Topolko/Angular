@@ -7,6 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class FizBuzzComponent implements OnInit {
 
+  nesto: string[]=[];
+
   @Input() num?: number;
   constructor() { }
 
@@ -16,8 +18,7 @@ export class FizBuzzComponent implements OnInit {
   getFiz(num: any)
   {
     var numberValue = Number(num);
-    let nesto: string[]=[];
-
+    this.nesto.splice(0)
     if (isNaN(numberValue)) {
       alert("not a number")
     }
@@ -27,23 +28,22 @@ export class FizBuzzComponent implements OnInit {
       {
         if (i % 3 == 0 && i % 5 == 0)
         {
-          nesto.push(' fiz-buzz ');
+          this.nesto.push(' fiz-buzz ');
         }
         else if (i % 5 == 0)
         {
-          nesto.push(' buzz ');
+          this.nesto.push(' buzz ');
         }
         else if (i % 3 == 0)
         {
-          nesto.push(' fiz ');
+          this.nesto.push(' fiz ');
         }
         else
         {
-          nesto.push(" "+i.toString()+" ");
+          this.nesto.push(" "+i.toString()+" ");
         }
       }
     }
-    alert(nesto)
   }
 }
 

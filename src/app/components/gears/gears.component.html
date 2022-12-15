@@ -2,16 +2,30 @@
   <h3>{{'main.bikeGears' | translate}}</h3>
     <div class="p-2">
       <h6>{{'gears.front' | translate}}</h6>
-      <input [(ngModel)]="pogon" placeholder='odvojite zarezom npr: 1,2,3'>
+      <div class="py-3">
+        <span class="p-float-label">
+            <input id="float-input" [(ngModel)]="pogon" type="text" size="30" pInputText> 
+            <label for="float-input">odvojite zarezom npr: 1,2,3</label>
+        </span>
+      </div>
     </div>
     <div class="p-2">
       <h6>{{'gears.back'| translate}}</h6>
-      <input [(ngModel)]="brojZub" placeholder='odvojite zarezom npr: 1,2,3'>
+      <div class="py-3">
+        <span class="p-float-label">
+            <input id="float-input" [(ngModel)]="brojZub" type="text" size="30" pInputText> 
+            <label for="float-input">odvojite zarezom npr: 1,2,3</label>
+        </span>
+      </div>
     </div>
     <div class="p-2" *ngIf="brojZub&&pogon else plsSelect">
       <p-button  (click)="getGears(pogon,brojZub)">{{'buttons.calc'| translate}}</p-button>
-  </div>
+    </div>
   <ng-template #plsSelect>
       <button pButton pRipple type="button" class="p-button-raised p-button-secondary p-button-text">{{'buttons.calc'| translate}}</button>
   </ng-template>
+
+  <ul>
+    <span *ngFor="let num of omjers">{{num}}</span>
+</ul>
 </div>

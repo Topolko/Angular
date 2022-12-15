@@ -8,6 +8,10 @@ import { FormsModule } from '@angular/forms';
 // import ngx-translate and the http loader
 import { TranslateModule } from '@ngx-translate/core';
 
+import {FocusTrapModule} from 'primeng/focustrap';
+import { InputTextModule } from "primeng/inputtext";
+import {ButtonModule} from 'primeng/button';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +21,9 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     ReverseNumberRoutingModule,
     FormsModule,
+    FocusTrapModule,
+    ButtonModule,
+    InputTextModule,
     TranslateModule
   ],
   exports: [

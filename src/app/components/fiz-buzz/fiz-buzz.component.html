@@ -1,7 +1,15 @@
 <div class="p-5">
     <h3>Fiz-Buzz</h3>
-    <input [(ngModel)]="num" placeholder='enter a number'>
     <div class="py-2">
-        <button (click)="getFiz(num)">Fiz-Buzz</button>
+        <span class="p-float-label">
+            <input id="float-input" [(ngModel)]="num" type="text" size="30" pInputText> 
+            <label for="float-input">Enter a number</label>
+        </span>
+        <div class="py-2">
+            <p-button (click)="getFiz(num)">Fiz-Buzz</p-button>
+        </div>
     </div>
+    <ul>
+        <span *ngFor="let num of nesto">{{num}},</span>
+    </ul>
 </div>

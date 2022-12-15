@@ -7,6 +7,10 @@ import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from "primeng/inputtext";
 
 @NgModule({
   declarations: [
@@ -17,6 +21,10 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     HeroesRoutingModule,
     FormsModule,
+    InputTextModule,
+    DialogModule,
+    ButtonModule,
+    TableModule,
     TranslateModule
   ],
   exports: [

@@ -19,6 +19,7 @@ import {TableModule} from 'primeng/table';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {ButtonModule} from 'primeng/button';
 import {FocusTrapModule} from 'primeng/focustrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {FocusTrapModule} from 'primeng/focustrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     FormsModule,    
     FocusTrapModule,
     TableModule,

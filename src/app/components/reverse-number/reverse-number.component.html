@@ -1,7 +1,15 @@
 <div class="p-5">
     <h3>{{'main.reverseNumber' | translate}}</h3>
-    <input id="num" [(ngModel)]="num" placeholder='enter a number'>
     <div class="py-2">
-        <button (click)="getReverse(num)">Reverse</button>
+        <span class="p-float-label">
+            <input id="float-input" [(ngModel)]="num" type="text" size="30" pInputText> 
+            <label for="float-input">Enter a number</label>
+        </span>
+        <div class="py-2">
+            <p-button (click)="getReverse(num)">Reverse</p-button>
+        </div>
     </div>
+    <ul>
+        <span *ngFor="let num of reverse">{{num}}</span>
+    </ul>
 </div>

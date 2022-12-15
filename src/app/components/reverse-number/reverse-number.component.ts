@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ReverseNumberComponent implements OnInit {
 
+  reverse: number[]=[];
   @Input() num?: number;
 
   constructor() { }
@@ -18,9 +19,9 @@ export class ReverseNumberComponent implements OnInit {
       alert("Not a number")
     }
     else {
-      alert(
-        parseFloat(num.toString().split('').reverse().join('')) * Math.sign(num)
-      )      
+
+      this.reverse.push(parseFloat(num.toString().split('').reverse().join('')) * Math.sign(num))  
+          
     }
     return
   }

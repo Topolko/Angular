@@ -5,6 +5,7 @@
             <ul>
                 <div *ngIf="points$ | async as points">
                     <div>
+                        <button pButton pRipple label="New Point" icon="pi pi-plus" (click)="showModalDialog('point')" class="p-button-success mr-2" ></button>
                         <p-table [value]="points" selectionMode="single" [(selection)]="selectedPoint" [tableStyle]="{}">
                             <ng-template pTemplate="header">
                                 <tr>
@@ -27,25 +28,22 @@
             <div *ngIf="selectedPoint">
                 <h2>Point details</h2>
                 <div>id: {{selectedPoint.id}}</div>
-                <div>
+                <div class="py-1">
                     <label for="point-x">Point x: </label>
                     <input id="point-x" [(ngModel)]="selectedPoint.x" placeholder="x">
                 </div>
-                <div>
+                <div class="py-1">
                     <label for="point-y">Point y: </label>
                     <input id="point-y" [(ngModel)]="selectedPoint.y" placeholder="y">
                 </div>
             </div>
-
-            
-
-
         </div>
         <div>
             <h2>{{'draw.myCircles' | translate}}</h2>
             <ul>
                 <div *ngIf="krugs$ | async as krugs">
                     <div>
+                        <button pButton pRipple label="New Krug" icon="pi pi-plus" (click)="showModalDialog('krug')" class="p-button-success mr-2" ></button>
                         <p-table [value]="krugs" selectionMode="single" [(selection)]="selectedKrug" [tableStyle]="{}">
                             <ng-template pTemplate="header">
                                 <tr>
@@ -70,20 +68,20 @@
             <div *ngIf="selectedKrug">
                 <h2>Krug details</h2>
                 <div>id: {{selectedKrug.id}}</div>
-                <div>
+                <div class="py-1">
                     <label for="point-x">Center x: </label>
                     <input id="point-x" [(ngModel)]="selectedKrug.x" placeholder="x">
                 </div>
-                <div>
+                <div class="py-1">
                     <label for="point-y">Center y: </label>
                     <input id="point-y" [(ngModel)]="selectedKrug.y" placeholder="y">
                 </div>
-                <div>
+                <div class="py-1">
                     <label for="point-radius">Radius: </label>
                     <input id="point-radius" [(ngModel)]="selectedKrug.radius" placeholder="radius">
                 </div>
-                <div *ngIf="selectedPoint">
-                    <button (click)="moveToPoint(selectedPoint,'krug')">{{'draw.moveToPoint' | translate}}</button>
+                <div class="py-1" *ngIf="selectedPoint">
+                    <p-button (click)="moveToPoint(selectedPoint,'krug')">{{'draw.moveToPoint' | translate}}</p-button>
                 </div>
             </div>
         </div>
@@ -93,12 +91,14 @@
             <ul>
                 <div *ngIf="trokuts$ | async as trokuts">
                     <div>
+                        <button pButton pRipple label="New Krug" icon="pi pi-plus" (click)="showModalDialog('trokut')" class="p-button-success mr-2" ></button>
                         <p-table [value]="trokuts" selectionMode="single" [(selection)]="selectedTrokut" [tableStyle]="{}">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>Id</th>
                                     <th>Center -x</th>
                                     <th>Center -y</th>
+                                    <th>Stranica</th>
                                     <th>Opseg</th>
                                     <th>Povrsina</th>
                                 </tr>
@@ -108,6 +108,7 @@
                                     <td>{{trokut.id}}</td>
                                     <td>{{trokut.x}}</td>
                                     <td>{{trokut.y}}</td>
+                                    <td>{{trokut.stranica}}</td>
                                     <td>{{trokut.stranica | opsegTrokut}}</td>
                                     <td>{{trokut.stranica | povrsinaTrokut}}</td>
                                 </tr>
@@ -119,34 +120,88 @@
             <div *ngIf="selectedTrokut">
                 <h2>Triangle details</h2>
                 <div>id: {{selectedTrokut.id}}</div>
-                <div>
+                <div class="py-1">
                     <label for="point-x">Center x: </label>
                     <input id="point-x" [(ngModel)]="selectedTrokut.x" placeholder="x">
                 </div>
-                <div>
+                <div class="py-1">
                     <label for="point-y">Center y: </label>
                     <input id="point-y" [(ngModel)]="selectedTrokut.y" placeholder="y">
                 </div>
-                <div>
+                <div class="py-1">
                     <label for="point-radius">Stranice: </label>
                     <input id="point-radius" [(ngModel)]="selectedTrokut.stranica" placeholder="radius">
                 </div>
-                <div>
+                <div class="py-1">
                     <label for="point-radius">Opseg: {{selectedTrokut.stranica | opsegTrokut}}</label>
                 </div>
-                <div>
+                <div class="py-1">
                     <label for="point-radius">Povrsina: {{selectedTrokut.stranica | povrsinaTrokut}}</label>
                 </div>
-                <!-- <div>
-                    <label for="point-radius">Opseg: {{selectedTrokut.opseg}}</label>
-                </div>
-                <div>
-                    <label for="point-radius">Površina: {{selectedTrokut.area}}</label>
-                </div> -->
-                <div *ngIf="selectedPoint">
-                    <button (click)="moveToPoint(selectedPoint, 'trokut')">{{'draw.moveToPoint' | translate}}</button>
+                <div class="py-1" *ngIf="selectedPoint">
+                    <p-button (click)="moveToPoint(selectedPoint, 'trokut')">{{'draw.moveToPoint' | translate}}</p-button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<p-dialog header="New Point" [(visible)]="displayPoint" [modal]="true" class="py-5">
+    <div class="py-3">
+        <span class="p-float-label">
+            <input id="NewX" [(ngModel)]="newX" type="number" ng-model="newX" pInputText > 
+            <label for="NewX" >Point-x</label>
+        </span>
+    </div>
+    <div class="py-3">
+        <span class="p-float-label">
+            <input id="NewY" [(ngModel)]="newY" type="number" ng-model="newY" pInputText > 
+            <label for="NewY" >Point-y</label>
+        </span>
+    </div>
+        <button pButton pRipple label="New" icon="pi pi-plus" (click)="addPoint(newX, newY)" class="p-button-success mr-2" ></button>
+</p-dialog>
+
+<p-dialog header="New Circle" [(visible)]="displayCircle" [modal]="true">
+    <div class="py-3">
+        <span class="p-float-label">
+            <input id="newX" [(ngModel)]="newX" type="number" ng-model="newX" pInputText > 
+            <label for="newX" >Point-x</label>
+        </span>
+    </div>
+    <div class="py-3">
+        <span class="p-float-label">
+            <input id="newY" [(ngModel)]="newY" type="number" ng-model="newY" pInputText > 
+            <label for="newY" >Point-y</label>
+        </span>
+    </div>
+    <div class="py-3">
+        <span class="p-float-label">
+            <input id="newRadius" [(ngModel)]="newRadius" type="number" min="1" ng-model="newRadius" pInputText > 
+            <label for="newRadius" >Radius</label>
+        </span>
+    </div>
+    <button pButton pRipple label="New" icon="pi pi-plus" (click)="addCircle(newX, newY, newRadius)" class="p-button-success mr-2" ></button>
+</p-dialog>
+
+<p-dialog header="New Trokut" [(visible)]="displayTriangle" [modal]="true">
+    <div class="py-3">
+        <span class="p-float-label">
+            <input id="newX" [(ngModel)]="newX" type="number" ng-model="newX" pInputText > 
+            <label for="newX" >Point-x</label>
+        </span>
+    </div>
+    <div class="py-3">
+        <span class="p-float-label">
+            <input id="newY" [(ngModel)]="newY" type="number" ng-model="newY" pInputText > 
+            <label for="newY" >Point-y</label>
+        </span>
+    </div>
+    <div class="py-3">
+        <span class="p-float-label">
+            <input id="newStranica" [(ngModel)]="newStranica" type="number" min="1" ng-model="newStranica" pInputText > 
+            <label for="newStranica" >Stranice</label>
+        </span>
+    </div>
+    <button pButton pRipple label="New" icon="pi pi-plus" (click)="addTrokut(newX, newY, newStranica)" class="p-button-success mr-2" ></button>
+</p-dialog>

@@ -10,6 +10,8 @@ export class GearsComponent implements OnInit {
   @Input() brojZub?: any;
   @Input() pogon?: any;
 
+  omjers: string[] = [];
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -41,7 +43,7 @@ export class GearsComponent implements OnInit {
         omjer.push((zubcanik / pogon).toFixed(2))
       })
     })
-    alert(omjer)
+    this.omjers=(omjer)
   }
 
 }

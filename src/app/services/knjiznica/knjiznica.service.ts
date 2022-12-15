@@ -51,5 +51,18 @@ export class KnjiznicaService {
     const members = of(MEMBERS);
     return members;
   }
-  
+  addBook(newTitle: string | undefined, newAutor :string | undefined,newCopies :number | undefined){
+    if(typeof newTitle!='undefined' && typeof newAutor!='undefined' && typeof newCopies !='undefined'){
+      let book : Book = {
+        id: Math.max.apply(Math, BOOKS.map(function(o) { return o.id+1; })),
+        title: newTitle,
+        autor:newAutor,
+        brojPrimjeraka:newCopies
+      }
+      BOOKS.push(book)
+    }
+    else{
+      alert('entered values are invalid')
+    }
+  }
 }
