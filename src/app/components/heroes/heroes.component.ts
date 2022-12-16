@@ -53,6 +53,7 @@ export class HeroesComponent implements OnInit {
   ngOnInit() {
     // this.loadData();
     // this.joinCall();
+    this.getList();
   }
 
   getList(): void {
@@ -102,7 +103,7 @@ export class HeroesComponent implements OnInit {
     this.joinCallObservable = forkJoin(getEmployees, getUsers)
       .pipe(map((responseArray: [any[], any]) => {
         this.employeeList = responseArray[0];
-        this.userList = responseArray[1];
+        this.userList = responseArray[1].data;
         this.empLastList = [];
 
         this.httpClient
